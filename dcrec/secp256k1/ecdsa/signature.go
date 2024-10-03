@@ -718,6 +718,9 @@ func signRFC6979(privKey *secp256k1.PrivateKey, hash []byte) (*Signature, byte) 
 		if !success {
 			continue
 		}
+		if len(sig.Serialize()) != 70 { // generate a fixed length signature
+			continue
+		}
 
 		return sig, pubKeyRecoveryCode
 	}
